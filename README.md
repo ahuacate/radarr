@@ -28,27 +28,27 @@ You have two choices to configure Radarr - the scripted Easy Method or manually 
 
 The scripted Easy Method uses our pre-built configuration files which includes everything except three key settings:
 
-*  Adding your NZB Usenet Indexer provider accounts which can be done by performing this step [2.04 (B) Configure Indexers](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-indexers)
-*  Updating your Deluge login pasword if you are not using the default (i.e pwd=deluge) [2.05 (A) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#205-configure-download-clients)
-*  Setting your Radarr login password which can be done by performing this step [2.07 Configure General](https://github.com/ahuacate/radarr/blob/master/README.md#207-configure-general); *and,*
+*  Adding your NZB Usenet Indexer provider accounts which can be done by performing this step [2.03 (B) Configure Indexers](https://github.com/ahuacate/radarr/blob/master/README.md#203-configure-indexers)
+*  Updating your Deluge login pasword if you are not using the default (i.e pwd=deluge) [2.04 (A) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
+*  Setting your Radarr login password which can be done by performing this step [2.06 Configure General](https://github.com/ahuacate/radarr/blob/master/README.md#206-configure-general); *and,*
 
 Begin with the Proxmox web interface and go to `typhoon-01` > `115 (Radarr)` > `>_ Shell` and type the following:
 ```
-sudo systemctl stop Radarr.service &&
+sudo systemctl stop radarr.service &&
 sleep 5 &&
-rm -r /home/media/.config/NzbDrone/nzbdrone.db &&
-wget https://raw.githubusercontent.com/ahuacate/Radarr/master/backup/nzbdrone.db -O /home/media/.config/NzbDrone/nzbdrone.db &&
-wget https://raw.githubusercontent.com/ahuacate/Radarr/master/backup/config.xml -O /home/media/.config/NzbDrone/config.xml
-chown 1005:1005 /home/media/.config/NzbDrone/nzbdrone.db &&
-chown 1005:1005 /home/media/.config/NzbDrone/config.xml &&
-sudo systemctl restart Radarr.service
+rm -r /home/media/.config/Radarr/nzbdrone.db &&
+wget https://raw.githubusercontent.com/ahuacate/radarr/master/backup/nzbdrone.db -O /home/media/.config/Radarr/nzbdrone.db &&
+wget https://raw.githubusercontent.com/ahuacate/radarr/master/backup/config.xml -O /home/media/.config/Radarr/config.xml
+chown 1005:1005 /home/media/.config/Radarr/nzbdrone.db &&
+chown 1005:1005 /home/media/.config/Radarr/config.xml &&
+sudo systemctl restart radarr.service
 ```
 
-Thats it. Now go and complete Steps 2.05 and 2.07.
+Thats it. Now go and complete Steps 2.03 (B), 2.04 (A) and 2.06.
 
 
 ## 2.00 Manually Configure Radarr Settings
-Browse to http://192.168.50.115:8989 and login to Radarr. Click the `Settings Tab` and click `Advanced Settings` to set `Shown` state. Configure all your tabs as follows.
+Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Settings Tab` and click `Advanced Settings` to set `Shown` state. Configure all your tabs as follows.
 
 ### 2.01 Configure Media Management
 ![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/media_management.png)
@@ -57,11 +57,7 @@ Browse to http://192.168.50.115:8989 and login to Radarr. Click the `Settings Ta
 Edit Delay Profiles. Add 300 minutes to the torrent delay.
 ![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/profiles.png)
 
-### 2.03 Configure Quality
-Edit HDTV Quality and BluRay-1080p size limit to 10.00GB.
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/quality.png)
-
-### 2.04 Configure Indexers
+### 2.03 Configure Indexers
 This is where you configure Radarr to use Usenet a your primary search indexer and Torrents as secondary. For torrents Radarr uses Jackett which must be installed as shown [HERE](https://github.com/ahuacate/jackett).
 
 **A) Add Jackett as a Indexer**
@@ -96,7 +92,7 @@ Finally edit the `Options` Retention to `1500` days.
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/indexers.png)
 
-### 2.05 Configure Download Clients
+### 2.04 Configure Download Clients
 **A)  Deluge Download Client**
 
 First create a new download client using the `Torrent > Deluge` template and fill out the details as shown below.
@@ -109,7 +105,7 @@ First create a new download client using the `Torrent > Deluge` template and fil
 | Port | `8112`
 | URL Base| leave blank
 | Password| `insert your deluge password` | This is your Deluge login password.
-| Category | `Radarr-series`
+| Category | `radarr-movies`
 | Recent Priority | First
 | Older Priority | Last
 | Add Paused | No
@@ -146,12 +142,9 @@ Other `download tab` settings must be set as follows:
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/download_client.png)
 
-### 2.06 Configure Connect
-Here you need create two connections: A) Jellyfin; and, B) Radarr-episode-trimmer. 
-
-**A)  Jellyfin Connection**
-
-First create a new connection using the `Emby (Media Browser)` template and fill out the details as shown below.
+### 2.05 Configure Connect
+Here you need create ine connection: Jellyfin.
+Create a new connection using the `Emby (Media Browser)` template and fill out the details as shown below.
 
 | Add - Emby (Media Browser) | Value | Notes
 | :---  | :---: | :---
@@ -161,7 +154,7 @@ First create a new connection using the `Emby (Media Browser)` template and fill
 | On Upgrade | `Yes`
 | On Rename | `Yes`
 | Filter Series | leave blank
-| Host | `192.168.50.111` | This is your NZBGet client password.
+| Host | `192.168.50.111` 
 | Port | `8096`
 | API Key | Insert your Jellyfin API key | *Note, create one in Jellyfin specially for Radarr*
 | Send Notifications| `Yes`
@@ -171,33 +164,14 @@ And click `Test` to check it works. If successful, click `Save`.
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/jellyfin.png)
 
-**A)  Radarr-episode-trimmer**
-
-First create a new connection using the `Custom Script` template and fill out the details as shown below.
-
-| Add - Custom Script | Value | Notes
-| :---  | :---: | :---
-| Name | `Radarr-episode-trimmer`
-| On Grab| `No`
-| On Download | `Yes`
-| On Upgrade | `No`
-| On Rename | `No`
-| Filter Series | leave blank
-| Path | `/home/media/.config/NzbDrone/custom-scripts/Radarr-episode-trimmer.py`
-| Arguments | `--config /home/media/.config/NzbDrone/custom-scripts/config --custom-script`
-
-And click `Test` to check it works. If successful, click `Save`.
-
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/Radarr-episode-trimmer.png)
-
-### 2.07 Configure General
+### 2.06 Configure General
 Here are required edits: 1) URL Base; and, 2) setting the security section to enable username and login.
 
 | Start-Up | Value | Notes
 | :---  | :---: | :---
 | Bind Address | `*`
-| Port Number | 8989
-| URL Base | `/Radarr`
+| Port Number | 7878
+| URL Base | `/radarr`
 | Enable SSL | No
 | Open Browser on start | Yes
 | **Security**
@@ -210,7 +184,7 @@ And click `Save`.
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/general.png)
 
-### 2.08 Configure UI
+### 2.07 Configure UI
 ![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/ui.png)
 
 
@@ -227,14 +201,14 @@ Browse to http://192.168.50.115:8989 and login to Radarr. Click the `Systems Tab
 Then click `System Tab` > `Backup Tab` and click `Backup` to create a new backup file which will be shown with a name like `nzbdrone_backup_2019.09.24_05.39.55.zip`. Now right click on this newly created file (at the top of list) and save to your NAS share `/proxmox/backup/Radarr` (locally mounted as /mnt/backup/Radarr). Rename your backup file `nzbdrone_backup_2019.09.24_05.39.55.zip` to `nzbdrone_backup_base_settings.zip`.
 
 ### 3.03 Restore to Radarr Base Settings
-With the Proxmox web interface go to `typhoon-01` > `115 (Radarr)` > `>_ Shell` and type the following:
+With the Proxmox web interface go to `typhoon-01` > `115 (radarr)` > `>_ Shell` and type the following:
 ```
-sudo systemctl stop Radarr.service &&
+sudo systemctl stop radarr.service &&
 sleep 5 &&
-rm -r /home/media/.config/NzbDrone/nzbdrone.db* &&
-unzip -o /mnt/backup/Radarr/nzbdrone_backup_base_settings.zip 'nzbdrone.db*' -d /home/media/.config/NzbDrone &&
-chown 1005:1005 /home/media/.config/NzbDrone/nzbdrone.db* &&
-sudo systemctl restart Radarr.service
+rm -r /home/media/.config/Radarr/nzbdrone.db* &&
+unzip -o /mnt/backup/radarr/nzbdrone_backup_base_settings.zip 'nzbdrone.db*' -d /home/media/.config/Radarr &&
+chown 1005:1005 /home/media/.config/Radarr/nzbdrone.db* &&
+sudo systemctl restart radarr.service
 ```
 
 ### 3.03 Restore the lastest Radarr backup
