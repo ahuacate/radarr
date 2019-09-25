@@ -24,13 +24,13 @@ Tasks to be performed are:
 
 
 ## 1.00 Easy Radarr Configuration
-You have two choices to configure Radarr - the scripted Easy Method or manually enter all the settings yourself. If you choose the manual route proceed to Step 2 [HERE](https://github.com/ahuacate/Radarr/blob/master/README.md#200-manually-configure-Radarr-settings).
+You have two choices to configure Radarr - the scripted Easy Method or manually enter all the settings yourself. If you choose the manual route proceed to Step 2 [HERE](https://github.com/ahuacate/radarr/blob/master/README.md#200-manually-configure-radarr-settings).
 
-The scripted Easy Method uses our pre-built configuration files which includes everything except two key settings:
+The scripted Easy Method uses our pre-built configuration files which includes everything except three key settings:
 
-*  Adding your NZB Usenet Indexer provider accounts which can be done by performing this step [2.04 (B) Configure Indexers](https://github.com/ahuacate/Radarr/blob/master/README.md#204-configure-indexers)
-*  Updating your Deluge login pasword if you are not using the default (i.e pwd=deluge) [2.05 (A) Configure Download Client](https://github.com/ahuacate/Radarr/blob/master/README.md#205-configure-download-clients)
-*  Setting your Radarr login password which can be done by performing this step [2.07 Configure General](https://github.com/ahuacate/Radarr/blob/master/README.md#207-configure-general); *and,*
+*  Adding your NZB Usenet Indexer provider accounts which can be done by performing this step [2.04 (B) Configure Indexers](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-indexers)
+*  Updating your Deluge login pasword if you are not using the default (i.e pwd=deluge) [2.05 (A) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#205-configure-download-clients)
+*  Setting your Radarr login password which can be done by performing this step [2.07 Configure General](https://github.com/ahuacate/radarr/blob/master/README.md#207-configure-general); *and,*
 
 Begin with the Proxmox web interface and go to `typhoon-01` > `115 (Radarr)` > `>_ Shell` and type the following:
 ```
