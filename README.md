@@ -29,8 +29,8 @@ You have two choices to configure Radarr - the scripted Easy Method or manually 
 The scripted Easy Method uses our pre-built configuration files which includes everything except three key settings:
 
 *  Adding your NZB Usenet Indexer provider accounts which can be done by performing this step [2.03 (B) Configure Indexers](https://github.com/ahuacate/radarr/blob/master/README.md#203-configure-indexers)
-*  Updating your Deluge login pasword if you are not using the default (i.e pwd=deluge) [2.04 (A) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
-*  Setting your Radarr login password which can be done by performing this step [2.06 Configure General](https://github.com/ahuacate/radarr/blob/master/README.md#206-configure-general); *and,*
+*  Updating Deluge access login username & password if you are not using the default credentials (i.e pwd=deluge) [2.04 (A) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
+*  Updating Radarr to use a secure login username & password which can be done by performing this step [2.06 Configure General](https://github.com/ahuacate/radarr/blob/master/README.md#206-configure-general); *and,*
 
 Begin with the Proxmox web interface and go to `typhoon-01` > `115 (Radarr)` > `>_ Shell` and type the following:
 ```
@@ -51,38 +51,38 @@ Thats it. Now go and complete Steps 2.03 (B), 2.04 (A) and 2.06.
 Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Settings Tab` and click `Advanced Settings` to set `Shown` state. Configure all your tabs as follows.
 
 ### 2.01 Configure Media Management
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/media_management.png)
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/media_management.png)
 
 ### 2.02 Configure Profiles
 Edit Delay Profiles. Add 300 minutes to the torrent delay.
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/profiles.png)
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/profiles.png)
 
 ### 2.03 Configure Indexers
 This is where you configure Radarr to use Usenet a your primary search indexer and Torrents as secondary. For torrents Radarr uses Jackett which must be installed as shown [HERE](https://github.com/ahuacate/jackett).
 
 **A) Add Jackett as a Indexer**
 
-Create a new torrent indexer using the `Torznab Custom` template and fill out the details as shown below.
+Create a new torrent indexer using the `Torznab Jackett Preset` template and fill out the details as shown below.
 
 | Add Torznab | Value
 | :---  | :---:
 | Name | `Jackett`
 | Enable RSS Sync | `No`
 | Enable Search | `Yes`
-| URL | `http://192.168.30.113:9117`
-| API Path | `/torznab/all/api`
+| URL | `http://192.168.30.113:9117/torznab/all/api`
+| Multi Languages | leave blank
 | API Key | `s9tcqkddvjpkmis824pp6ucgpwcd2xnc`
-| Categories | `5030,5040`
+| Categories | `2000,2010,2020,2030,2035,2040,2045,2050,2060`
 | Anime Categories | leave blank
 | Additional Parameters | leave blank
+| Remove year from search string | No
+| Search by Title | `Yes`
 | Minimum Seeders | `1`
-| Seed Ratio | leave blank
-| Seed Time | leave blank
-| Season-Pack Seed Time | leave blank
+| Required Flags | leave blank
 
 And click `Save`. The finished Jackett configuration looks like:
 
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/torznab.png)
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/torznab.png)
 
 **B) Add Usenet Indexers**
 
@@ -90,7 +90,7 @@ Add all your Usenet indexers providers with the `Newsnab` presets (or custom if 
 
 Finally edit the `Options` Retention to `1500` days.
 
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/indexers.png)
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/indexers.png)
 
 ### 2.04 Configure Download Clients
 **A)  Deluge Download Client**
@@ -113,7 +113,7 @@ First create a new download client using the `Torrent > Deluge` template and fil
 
 And click `Test` to check it works. If successful, click `Save`.
 
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/deluge.png)
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/deluge.png)
 
 **B)  NZBGet Download Client**
 
@@ -128,32 +128,31 @@ First create a new download client using the `Usenet > NZBGet` template and fill
 | URL Base| leave blank
 | Username | `client`
 | Password| `insert your client password` | This is your NZBGet client password.
-| Category | `Radarr-series`
-| Recent Priority | High
+| Category | `radarr-movies`
+| Recent Priority | Normal
 | Older Priority | Normal
 | Add Paused | No
 | Use SSL | No
 
 And click `Test` to check it works. If successful, click `Save`.
 
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/nzbget.png)
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/nzbget.png)
 
 Other `download tab` settings must be set as follows:
 
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/download_client.png)
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/download_client.png)
 
 ### 2.05 Configure Connect
-Here you need create ine connection: Jellyfin.
 Create a new connection using the `Emby (Media Browser)` template and fill out the details as shown below.
 
 | Add - Emby (Media Browser) | Value | Notes
 | :---  | :---: | :---
 | Name | `Jellyfin`
-| On Grab| `No`
+| On Grab | `No`
 | On Download | `Yes`
 | On Upgrade | `Yes`
 | On Rename | `Yes`
-| Filter Series | leave blank
+| Filter Movie Tags | leave blank
 | Host | `192.168.50.111` 
 | Port | `8096`
 | API Key | Insert your Jellyfin API key | *Note, create one in Jellyfin specially for Radarr*
@@ -162,7 +161,7 @@ Create a new connection using the `Emby (Media Browser)` template and fill out t
 
 And click `Test` to check it works. If successful, click `Save`.
 
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/jellyfin.png)
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/jellyfin.png)
 
 ### 2.06 Configure General
 Here are required edits: 1) URL Base; and, 2) setting the security section to enable username and login.
@@ -182,10 +181,10 @@ Here are required edits: 1) URL Base; and, 2) setting the security section to en
 
 And click `Save`.
 
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/general.png)
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/general.png)
 
 ### 2.07 Configure UI
-![alt text](https://raw.githubusercontent.com/ahuacate/Radarr/master/images/ui.png)
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/ui.png)
 
 
 ## 3.00 Create & Restore Radarr Backups
