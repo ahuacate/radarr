@@ -26,11 +26,14 @@ Tasks to be performed are:
 ## 1.00 Easy Radarr Configuration
 You have two choices to configure Radarr - the scripted Easy Method or manually enter all the settings yourself. If you choose the manual route proceed to Step 2 [HERE](https://github.com/ahuacate/radarr/blob/master/README.md#200-manually-configure-radarr-settings).
 
-The scripted Easy Method uses our pre-built configuration files which includes everything except three key settings:
+The scripted Easy Method uses our pre-built configuration files which includes everything except four key settings:
 
 *  Adding your NZB Usenet Indexer provider accounts which can be done by performing this step [2.03 (B) Configure Indexers](https://github.com/ahuacate/radarr/blob/master/README.md#203-configure-indexers)
-*  Updating Deluge access login username & password if you are not using the default credentials (i.e pwd=deluge) [2.04 (A) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
-*  Updating Radarr to use a secure login username & password which can be done by performing this step [2.06 Configure General](https://github.com/ahuacate/radarr/blob/master/README.md#206-configure-general); *and,*
+*  Adding Deluge downloader login credentials [2.04 (A) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
+*  Adding NZBGet downloader login credentials [2.04 (B) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
+*  Add a IMDb Watchlist to autoadd your movies
+*  Add your JellyFin Connection
+*  Updating Radarr to use a secure login username & password which can be done by performing this step [2.06 Configure General](https://github.com/ahuacate/radarr/blob/master/README.md#207-configure-general); *and,*
 
 Begin with the Proxmox web interface and go to `typhoon-01` > `115 (Radarr)` > `>_ Shell` and type the following:
 ```
@@ -142,7 +145,28 @@ Other `download tab` settings must be set as follows:
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/download_client.png)
 
-### 2.05 Configure Connect
+### 2.05 Configure Lists
+If you dont have a IMDb account create one.
+
+Then go to your watchlist on IMDb's website. Press the `Edit` button for your list. On this page, you can add, remove, or re-order the watchlist. Now note URL adress because we need to copy the part that has "ur########". That's your IMDb ID so note it down. Then you can go back to Radarr > `Settings Tab` > `Lists Tab` and click the `+` to add a `Radarr Lists -- Presets -- UMDb List` and complete as follows:
+
+| Add - Radarr Lists | Value | Notes
+| :---  | :---: | :---
+| Name | `IMDb Listname` | *Best to use the IMDb account username so you can add multiple IMDb lists to Radarr (i.e IMDb Adolf, IMDb Eva or IMDb Kids)*
+| Enable Automatic Sync | `Yes`
+| Add Movies Monitored | `Yes`
+| Minimum Availability | `Physical/Web`
+| Quality Profile | `HD-1080p` | * If you have 4K HDR TV's then set to `Ultra-HD`*
+| Folder | /mnt/videos/movies/
+| Tags | leave blank
+| Radarr API URL | `https://api.radarr.video/v2`
+| Path to list |`/imdb/list?listId=urXXXXXXXX` | *Replace XXXXXXXX with your IMDb user ID*
+
+
+
+Create a new connection using the `Emby (Media Browser)` template and fill out the details as shown below.
+
+### 2.06 Configure Connect
 Create a new connection using the `Emby (Media Browser)` template and fill out the details as shown below.
 
 | Add - Emby (Media Browser) | Value | Notes
@@ -163,7 +187,7 @@ And click `Test` to check it works. If successful, click `Save`.
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/jellyfin.png)
 
-### 2.06 Configure General
+### 2.07 Configure General
 Here are required edits: 1) URL Base; and, 2) setting the security section to enable username and login.
 
 | Start-Up | Value | Notes
@@ -183,7 +207,7 @@ And click `Save`.
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/general.png)
 
-### 2.07 Configure UI
+### 2.08 Configure UI
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/ui.png)
 
 
