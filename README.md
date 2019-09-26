@@ -152,15 +152,15 @@ Then go to your watchlist on IMDb's website. Press the `Edit` button for your li
 
 | Add - Radarr Lists | Value | Notes
 | :---  | :---: | :---
-| Name | `IMDb Listname` | *Best to use the IMDb account username so you can add multiple IMDb lists to Radarr (i.e IMDb Adolf, IMDb Eva or IMDb Kids)*
+| Name | `IMDb Listname` | *Best to use a IMDb account username so you can add multiple IMDb lists to Radarr (i.e IMDb Adolf, IMDb Eva or IMDb Kids)*
 | Enable Automatic Sync | `Yes`
 | Add Movies Monitored | `Yes`
 | Minimum Availability | `Physical/Web`
-| Quality Profile | `HD-1080p` | * If you have 4K HDR TV's then set to `Ultra-HD`*
+| Quality Profile | `HD-1080p` | *Change to Ultra-HD if you have a 4K TV*
 | Folder | /mnt/videos/movies/
 | Tags | leave blank
 | Radarr API URL | `https://api.radarr.video/v2`
-| Path to list |`/imdb/list?listId=urXXXXXXXX` | *Replace XXXXXXXX with your IMDb user ID*
+| Path to list |`/imdb/list?listId=urXXXXXXXX` | *Replace XXXXXXXX with your IMDb user LISTID*
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/list.png)
 
@@ -179,7 +179,7 @@ Create a new connection using the `Emby (Media Browser)` template and fill out t
 | Filter Movie Tags | leave blank
 | Host | `192.168.50.111` 
 | Port | `8096`
-| API Key | Insert your Jellyfin API key | *Note, create one in Jellyfin specially for Radarr*
+| API Key | Insert your Jellyfin API key | *Note, create one in Jellyfin for Radarr*
 | Send Notifications| `Yes`
 | Update Library | `Yes`
 
