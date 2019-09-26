@@ -162,7 +162,7 @@ Then go to your watchlist on IMDb's website. Press the `Edit` button for your li
 | Radarr API URL | `https://api.radarr.video/v2`
 | Path to list |`/imdb/list?listId=urXXXXXXXX` | *Replace XXXXXXXX with your IMDb user ID*
 
-
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/list.png)
 
 Create a new connection using the `Emby (Media Browser)` template and fill out the details as shown below.
 
@@ -208,6 +208,7 @@ And click `Save`.
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/general.png)
 
 ### 2.08 Configure UI
+
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/ui.png)
 
 
@@ -223,7 +224,7 @@ Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Systems Tab
 
 Then click `System Tab` > `Backup Tab` and click `Backup` to create a new backup file which will be shown with a name like `radarr_backup_2019.09.24_05.39.55.zip`. Now right click on this newly created file (at the top of list) and save to your NAS share `/proxmox/backup/radarr` (locally mounted as /mnt/backup/radarr). Rename your backup file `radarr_backup_2019.09.24_05.39.55.zip` to `radarr_backup_base_settings.zip`.
 
-### 3.03 Restore to Radarr Base Settings
+### 3.02 Restore to Radarr Base Settings
 With the Proxmox web interface go to `typhoon-01` > `116 (radarr)` > `>_ Shell` and type the following:
 ```
 sudo systemctl stop radarr.service &&
@@ -246,5 +247,22 @@ unzip -o "$newest" 'nzbdrone.db*' -d /home/media/.config/Radarr &&
 chown 1005:1005 /home/media/.config/Radarr/nzbdrone.db* &&
 sudo systemctl restart radarr.service
 ```
+
+### 4.00 Add Content or Existing media
+Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Add Movies Tab` and type in the name of the movie you want. In this example we search for 'Shawshank'. Now most important are the following settings:
+
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/add_movie.png)
+
+
+| Add Movies | Value | Notes
+| :---  | :---: | :---
+| Path | `/mnt/video/movies/`
+| Monitor |`Yes`
+| Min Availability | Physical/Web
+| Profile | HD-1080p | *Change to Ultra-HD if you have a 4K TV*
+
+And click `Add` or `Search`. 
+
+
 
 ## 00.00 Patches & Fixes
