@@ -263,6 +263,4 @@ Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Add Movies 
 
 And click `Add` or `Search`. 
 
-
-
 ## 00.00 Patches & Fixes
