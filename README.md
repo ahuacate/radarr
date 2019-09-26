@@ -261,6 +261,6 @@ Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Add Movies 
 | Min Availability | Physical/Web
 | Profile | HD-1080p | *Change to Ultra-HD if you have a 4K TV*
 
-And click `Add` or `Search`. 
+And click `Add +` or `Search`. 
 
 ## 00.00 Patches & Fixes
