@@ -62,7 +62,7 @@ Edit Delay Profiles. Add 300 minutes to the torrent delay.
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/profiles.png)
 
 ### 2.03 Configure Indexers
-This is where you configure Radarr to use Usenet a your primary search indexer and Torrents as secondary. For torrents Radarr uses Jackett which must be installed as shown [HERE](https://github.com/ahuacate/jackett).
+This is where you configure Lidarr to use Usenet as your primary search indexer and Torrents (Jackett) as the secondary indexer.  For torrents Radarr uses Jackett which must be installed as shown [HERE](https://github.com/ahuacate/jackett).
 
 **A) Add Jackett as a Indexer**
 
