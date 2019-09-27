@@ -216,14 +216,16 @@ And click `Save`.
 ## 3.00 Create & Restore Radarr Backups
 Radarr has a built in backup service. Radarr will execute a backup every 7 days creating a zip file located in `/home/media/.config/Radarr/Backups/scheduled`.
 
-But it's good idea to make a raw backup of your working base settings configuration, including all settings, before adding any movie media. This backup file must be stored outside of the Radarr CT container for safe keeping. Then in the event of needing to recreate a Radarr CT you can use this backup file to quickly restore all your Radarr settings. This backup file must be named `radarr_backup_base_settings.zip` and be located on your NAS in folder `/mnt/backup/radarr` for below scripts to work.
+But it's good idea to make a clean backup of your working Radarr settings, including all settings such as passwords etc, before adding any movie media. The clean backup file MUST be stored outside of the Proxmox Radarr LXC container for safe keeping. Then in the event of you needing to recreate your Radarr LXC you can use this backup file to quickly restore all your Radarr settings.
+
+This backup file must be named `radarr_backup_base_settings.zip` and be located on your NAS in folder `/mnt/backup/radarr` for the following scripts to work.
 
 ### 3.01 Create a Base Settings Backup
-After you have completed Steps 1.00 or Steps 2.00 its time to create **new** private base settings backup. This file will be stored on your NAS for future rebuilds when and if required.
+Perform after you have completed Steps 1.00 or Steps 2.00. This file must be stored on your NAS for future rebuilds
 
 Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Systems Tab` > `Logs Tab` > `Table/Files/Updates Tabs` and click `Clear Logs` on all.
 
-Then click `System Tab` > `Backup Tab` and click `Backup` to create a new backup file which will be shown with a name like `radarr_backup_2019.09.24_05.39.55.zip`. Now right click on this newly created file (at the top of list) and save to your NAS share `/proxmox/backup/radarr` (locally mounted as /mnt/backup/radarr). Rename your backup file `radarr_backup_2019.09.24_05.39.55.zip` to `radarr_backup_base_settings.zip`.
+Then click `System Tab` > `Backup Tab` and click `Backup` to create a new backup file which will be shown with a name like `radarr_backup_2019.09.24_05.39.55.zip`. Now right click on this newly created file (at the top of list) and save to your NAS share `/proxmox/backup/radarr` (locally mounted as /mnt/backup/radarr). Rename your backup file from `radarr_backup_2019.09.24_05.39.55.zip` to `radarr_backup_base_settings.zip`.
 
 ### 3.02 Restore to Radarr Base Settings
 With the Proxmox web interface go to `typhoon-01` > `116 (radarr)` > `>_ Shell` and type the following:
