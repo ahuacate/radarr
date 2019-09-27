@@ -30,8 +30,8 @@ Or take the the manual route and proceed to Step 2 [HERE](https://github.com/ahu
 After running the scripted CLI Easy Method your input is required for the following settings:
 
 *  Adding your NZB Usenet Indexer provider accounts which can be done by performing this step [2.03 (B) Configure Indexers](https://github.com/ahuacate/radarr/blob/master/README.md#203-configure-indexers)
-*  Adding Deluge downloader login credentials [2.04 (A) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
-*  Adding NZBGet downloader login credentials [2.04 (B) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
+*  Adding Deluge downloader and login credentials [2.04 (A) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
+*  Adding NZBGet downloader and login credentials [2.04 (B) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
 *  Add a IMDb Watchlist to autoadd your movies [2.05 Configure Lists](https://github.com/ahuacate/radarr/blob/master/README.md#205-configure-lists)
 *  Add your JellyFin Connection [2.06 Configure Connect](https://github.com/ahuacate/radarr/blob/master/README.md#206-configure-connect)
 *  Updating Radarr to use a secure login username & password which can be done by performing this step [2.06 Configure General](https://github.com/ahuacate/radarr/blob/master/README.md#207-configure-general); *and,*
