@@ -165,8 +165,6 @@ Then go to your watchlist on IMDb's website. Press the `Edit` button for your li
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/list.png)
 
-Create a new connection using the `Emby (Media Browser)` template and fill out the details as shown below.
-
 ### 2.06 Configure Connect
 Create a new connection using the `Emby (Media Browser)` template and fill out the details as shown below.
 
