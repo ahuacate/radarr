@@ -41,11 +41,11 @@ Begin the Easy Method with the Proxmox web interface and go to `typhoon-01` > `1
 ```
 sudo systemctl stop radarr.service &&
 sleep 5 &&
-rm -r /home/media/.config/Radarr/nzbdrone.db &&
+rm -r /home/media/.config/Radarr/nzbdrone.db* &&
 wget https://raw.githubusercontent.com/ahuacate/radarr/master/backup/nzbdrone.db -O /home/media/.config/Radarr/nzbdrone.db &&
 wget https://raw.githubusercontent.com/ahuacate/radarr/master/backup/config.xml -O /home/media/.config/Radarr/config.xml
-chown 1005:1005 /home/media/.config/Radarr/nzbdrone.db &&
-chown 1005:1005 /home/media/.config/Radarr/config.xml &&
+chown 1105:100 /home/media/.config/Radarr/nzbdrone.db &&
+chown 1105:100 /home/media/.config/Radarr/config.xml &&
 sudo systemctl restart radarr.service
 ```
 
@@ -232,8 +232,10 @@ With the Proxmox web interface go to `typhoon-01` > `116 (radarr)` > `>_ Shell` 
 sudo systemctl stop radarr.service &&
 sleep 5 &&
 rm -r /home/media/.config/Radarr/nzbdrone.db* &&
-unzip -o /mnt/backup/radarr/radarr_backup_base_settings.zip 'nzbdrone.db*' -d /home/media/.config/Radarr &&
-chown 1005:1005 /home/media/.config/Radarr/nzbdrone.db* &&
+rm -r /home/media/.config/Radarr/config.xml &&
+unzip -o /mnt/backup/radarr/radarr_backup_base_settings.zip 'nzbdrone.db*' 'config.xml' -d /home/media/.config/Radarr &&
+chown 1105:100 /home/media/.config/Radarr/nzbdrone.db* &&
+chown 1105:100 /home/media/.config/Radarr/config.xml &&
 sudo systemctl restart radarr.service
 ```
 
@@ -246,7 +248,7 @@ rm -r /home/media/.config/Radarr/nzbdrone.db* &&
 newest=$(ls -t /home/media/.config/Radarr/Backups/scheduled/*.zip | head -1) &&
 echo $newest &&
 unzip -o "$newest" 'nzbdrone.db*' -d /home/media/.config/Radarr &&
-chown 1005:1005 /home/media/.config/Radarr/nzbdrone.db* &&
+chown 1105:100 /home/media/.config/Radarr/nzbdrone.db* &&
 sudo systemctl restart radarr.service
 ```
 
