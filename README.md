@@ -74,7 +74,7 @@ Create a new torrent indexer using the `Torznab Jackett Preset` template and fil
 | Name | `Jackett`
 | Enable RSS Sync | `No`
 | Enable Search | `Yes`
-| URL | `http://192.168.30.113:9117/torznab/all/api`
+| URL | `http://192.168.50.120:9117/torznab/all/api`
 | Multi Languages | leave blank
 | API Key | `s9tcqkddvjpkmis824pp6ucgpwcd2xnc`
 | Categories | `2000,2010,2020,2030,2035,2040,2045,2050,2060`
