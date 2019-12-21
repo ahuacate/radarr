@@ -228,14 +228,29 @@ Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Settings Ta
 
 Here we use `Custom Formats` to search for movies containing 4K, 10bit HDR and Dolby Atmos or DTS-X (for those people with atmos audio systems).
 
-**1 -  Lossless Object Surround + x265**
-C_RXRQ_(X|H).?265|HEVC
-C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X
----
-**2 -  Lossless Object Surround + x264**
-C_RXRQ_(X|H).?264
-C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X
-
+**1 -  Lossless Object Surround + x265**<br/>
+C_RXRQ_(X|H).?265|HEVC<br/>
+C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X<br/>
+<br/>
+**2 -  Lossless Object Surround + x264**<br/>
+C_RXRQ_(X|H).?264<br/>
+C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X<br/>
+<br/>
+**3 - Lossless Surround + x265**<br/>
+C_RXRQ_(X|H).?265|HEVC<br/>
+C_RXRQ_DTS.?HD|DTS.?MA|TRUEHD<br/>
+C_RXRQN_ATMOS<br/>
+<br/>
+**4 - Lossless Surround + x264**<br/>
+C_RXRQ_(X|H).?264<br/>
+C_RXRQ_DTS.?HD|DTS.?MA|TRUEHD<br/>
+C_RXRQN_ATMOS<br/>
+**5 - HQ Object Surround + x265**<br/>
+C_RXRQ_(X|H).?265|HEVC<br/>
+C_RXRQ_DDP.?ATMOS|DDP.?(5.1|7.1).?ATMOS|E.?AC.?3.?ATMOS|E.?AC.?3.?(5.1|7.1).?ATMOS|AC.?3.?ATMOS<br/>
+**6 - HQ Object Surround + x264**<br/>
+C_RXRQ_(X|H).?264<br/>
+C_RXRQ_DDP.?ATMOS|DDP.?(5.1|7.1).?ATMOS|E.?AC.?3.?ATMOS|E.?AC.?3.?(5.1|7.1).?ATMOS|AC.?3.?ATMOS<br/>
 
 
 ## 3.00 Create & Restore Radarr Backups
