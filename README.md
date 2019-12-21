@@ -17,11 +17,23 @@ Other Prerequisites are:
 - [x] Radarr LXC with Radarr SW installed as per [Radarr LXC - Ubuntu 18.04](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#90-radarr-lxc---ubuntu-1804)
 
 Tasks to be performed are:
-- [ ] 1.00 Easy Radarr Configuration
-- [ ] 2.00 Manually Configure Radarr Settings
-- [ ] 3.00 Create & Restore Radarr Backups
-- [ ] 4.00 Add Content or Existing media
-- [ ] 00.00 Patches & Fixes
+- [1.00 Easy Radarr Configuration](#100-easy-radarr-configuration)
+- [2.00 Manually Configure Radarr Settings](#200-manually-configure-radarr-settings)
+	- [2.01 Configure Media Management](#201-configure-media-management)
+	- [2.02 Configure Profiles](#202-configure-profiles)
+	- [2.03 Configure Indexers](#203-configure-indexers)
+	- [2.04 Configure Download Clients](#204-configure-download-clients)
+	- [2.05 Configure Lists](#205-configure-lists)
+	- [2.06 Configure Connect](#206-configure-connect)
+	- [2.07 Configure General](#207-configure-general)
+	- [2.08 Configure UI](#208-configure-ui)
+- [3.00 Create & Restore Radarr Backups](#300-create--restore-radarr-backups)
+	- [3.01 Create a Base Settings Backup](#301-create-a-base-settings-backup)
+	- [3.02 Restore to Radarr Base Settings](#302-restore-to-radarr-base-settings)
+	- [3.03 Restore the lastest Radarr backup](#303-restore-the-lastest-radarr-backup)
+	- [4.00 Add Content or Existing media](#400-add-content-or-existing-media)
+- [00.00 Patches & Fixes](#0000-patches--fixes)
+
 
 ## 1.00 Easy Radarr Configuration
 Easy Method configures some Radarr preferences BUT not all. 
