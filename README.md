@@ -223,6 +223,20 @@ And click `Save`.
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/ui.png)
 
+## 3.00 Custom Formats
+Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Settings Tab` and click `Advanced Settings` to set `Shown` state. Then click the `Custom Formats` tab.
+
+Here we use `Custom Formats` to search for movies containing 4K, 10bit HDR and Dolby Atmos or DTS-X (for those people with atmos audio systems).
+
+**1 -  Lossless Object Surround + x265**
+C_RXRQ_(X|H).?265|HEVC
+C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X
+---
+**2 -  Lossless Object Surround + x264**
+C_RXRQ_(X|H).?264
+C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X
+
+
 
 ## 3.00 Create & Restore Radarr Backups
 Radarr has a built in backup service. Radarr will execute a backup every 7 days creating a zip file located in `/home/media/.config/Radarr/Backups/scheduled`.
