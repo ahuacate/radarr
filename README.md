@@ -70,11 +70,7 @@ Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Settings Ta
 ### 2.01 Configure Media Management
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/media_management.png)
 
-### 2.02 Configure Profiles
-Edit Delay Profiles. Add 300 minutes to the torrent delay.
-![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/profiles.png)
-
-### 2.03 Configure Indexers
+### 2.02 Configure Indexers
 This is where you configure Lidarr to use Usenet as your primary search indexer and Torrents (Jackett) as the secondary indexer.  For torrents Radarr uses Jackett which must be installed as shown [HERE](https://github.com/ahuacate/jackett).
 
 **A) Add Jackett as a Indexer**
@@ -109,7 +105,7 @@ Finally edit the `Options` Retention to `1500` days.
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/indexers.png)
 
-### 2.04 Configure Download Clients
+### 2.03 Configure Download Clients
 **A)  Deluge Download Client**
 
 First create a new download client using the `Torrent > Deluge` template and fill out the details as shown below.
@@ -159,7 +155,7 @@ Other `download tab` settings must be set as follows:
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/download_client.png)
 
-### 2.05 Configure Lists
+### 2.04 Configure Lists
 If you dont have a IMDb account create one.
 
 Then go to your watchlist on IMDb's website. Press the `Edit` button for your list. On this page, you can add, remove, or re-order the watchlist. Now note URL adress because we need to copy the part that has "ur########". That's your IMDb ID so note it down. Then you can go back to Radarr > `Settings Tab` > `Lists Tab` and click the `+` to add a `Radarr Lists -- Presets -- UMDb List` and complete as follows:
@@ -178,7 +174,7 @@ Then go to your watchlist on IMDb's website. Press the `Edit` button for your li
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/list.png)
 
-### 2.06 Configure Connect
+### 2.05 Configure Connect
 Create a new connection using the `Emby (Media Browser)` template and fill out the details as shown below.
 
 | Add - Emby (Media Browser) | Value | Notes
@@ -199,7 +195,7 @@ And click `Test` to check it works. If successful, click `Save`.
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/jellyfin.png)
 
-### 2.07 Configure General
+### 2.06 Configure General
 Here are required edits: 1) URL Base; and, 2) setting the security section to enable username and login.
 
 | Start-Up | Value | Notes
@@ -219,12 +215,8 @@ And click `Save`.
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/general.png)
 
-### 2.08 Configure UI
-
-![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/ui.png)
-
-## 3.00 Custom Formats
-Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Settings Tab` and click `Advanced Settings` to set `Shown` state. Then click the `Custom Formats` tab.
+### 2.07 Custom Formats
+Click the `Custom Formats` tab.
 
 Here we use `Custom Formats` to search for movies containing our audio requirements.
 *  Lossless Object Surround: *Dolby TrueHD Atmos and DTS-X*
@@ -234,40 +226,46 @@ Here we use `Custom Formats` to search for movies containing our audio requireme
 *  Surround Dolby Digital: *Dolby Digital*
 *  Generic Surround: *Files or releases without one of the above codecs but containing 5.1/7.1 in the name*
 
+The following is my configuration. Its applicable for a 4K HDR 10bit TV, Atmos audio soundbar and Kodi player (i.e LG OLED C9, Samsung Atmos Q90R soundbar and Odroid N2 Coreelec player). Modify to meet your installed equipment.
+
 **1 -  Lossless Object Surround + x265 + HDR**
 ```
 C_RXRQ_(X|H).?265|HEVC
 C_RXRQ_HDR|10bit
 C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X
+C_RXRQN_SDR
 ```
 **2 -  Lossless Object Surround + HDR**
 ```
 C_RXRQ_HDR|10bit
 C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X
+C_RXRQN_SDR
 ```
 **3 - Lossless Surround + x265 + HDR**
 ```
 C_RXRQ_(X|H).?265|HEVC
 C_RXRQ_HDR|10bit
 C_RXRQ_DTS.?HD|DTS.?MA|TRUEHD
-C_RXRQN_ATMOS
+C_RXRQN_(ATMOS|SDR)
 ```
 **4 - Lossless Surround + HDR**
 ```
 C_RXRQ_HDR|10bit
 C_RXRQ_DTS.?HD|DTS.?MA|TRUEHD
-C_RXRQN_ATMOS
+C_RXRQN_(ATMOS|SDR)
 ```
 **5 - HQ Object Surround + x265 + HDR**
 ```
 C_RXRQ_(X|H).?265|HEVC
 C_RXRQ_HDR|10bit
 C_RXRQ_DDP.?ATMOS|DDP.?(5.1|7.1).?ATMOS|E.?AC.?3.?ATMOS|E.?AC.?3.?(5.1|7.1).?ATMOS|AC.?3.?ATMOS
+C_RXRQN_SDR
 ```
 **6 - HQ Object Surround + HDR**
 ```
 C_RXRQ_HDR|10bit
 C_RXRQ_DDP.?ATMOS|DDP.?(5.1|7.1).?ATMOS|E.?AC.?3.?ATMOS|E.?AC.?3.?(5.1|7.1).?ATMOS|AC.?3.?ATMOS
+C_RXRQN_SDR
 ```
 **7 - HQ Surround**
 ```
@@ -292,6 +290,23 @@ C_RXRQN_DTS.?
 C_RXRQN_ATMOS
 C_RXRQN_TRUEHD
 ```
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/custom_formats.png)
+
+### 2.08 Configure Profiles
+Profiles correspond to your TV, audio and media player capabilities. The following is a custom profile for `4K > HD-1080p`.
+
+**A)  Create a new Profile**
+
+Create a new profile by clicking the `+` icon. Complete the form as follows making sure of the order of `Custom Formats`.
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/4K_1080p.png)
+
+**B) Delay profiles**
+Edit Delay Profiles. Add 300 minutes to the torrent delay.
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/profiles.png)
+
+
+### 2.09 Configure UI
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/ui.png)
 
 ## 3.00 Create & Restore Radarr Backups
 Radarr has a built in backup service. Radarr will execute a backup every 7 days creating a zip file located in `/home/media/.config/Radarr/Backups/scheduled`.
