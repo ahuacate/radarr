@@ -216,15 +216,19 @@ And click `Save`.
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/general.png)
 
 ### 2.07 Custom Formats
-Click the `Custom Formats` tab.
+I only want 4K movies if they match a audio format. However, if it can't find a 4K release, it should just go with 1080p. This achieved by creating a new 'Profile' called `4K > HD-1080p` with `Custom Formats` audio and video compression tags. 
 
-Here we use `Custom Formats` to search for movies containing our audio requirements.
+First create a set of audio and video compression tags by clicking on the `Custom Formats` tab.
+
+Here we use `Custom Formats` to search for movies containing our audio requirements
 *  Lossless Object Surround: *Dolby TrueHD Atmos and DTS-X*
 *  Lossless Surround: *Dolby TrueHD, DTS-HD, and DTS-HD MA*
 *  HQ Object Surround: *Dolby Digital Plus with Atmos*
 *  HQ Surround: *Dolby Digital Plus and DTS*
 *  Surround Dolby Digital: *Dolby Digital*
 *  Generic Surround: *Files or releases without one of the above codecs but containing 5.1/7.1 in the name*
+
+I also add the requirement for HEVC + HDR 10bit to my ultimate audio quality search criteria (ignoring all SDR).
 
 The following is my configuration. Its applicable for a 4K HDR 10bit TV, Atmos audio soundbar and Kodi player (i.e LG OLED C9, Samsung Atmos Q90R soundbar and Odroid N2 Coreelec player). Modify to meet your installed equipment.
 
