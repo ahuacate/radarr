@@ -298,14 +298,17 @@ Profiles correspond to your TV, audio and media player capabilities. The followi
 **A)  Create a new Profile**
 
 Create a new profile by clicking the `+` icon. Complete the form as follows making sure of the order of `Custom Formats`.
+
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/4K_1080p.png)
 
 **B) Delay profiles**
 Edit Delay Profiles. Add 300 minutes to the torrent delay.
+
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/profiles.png)
 
 
 ### 2.09 Configure UI
+
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/ui.png)
 
 ## 3.00 Create & Restore Radarr Backups
