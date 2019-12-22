@@ -226,32 +226,72 @@ And click `Save`.
 ## 3.00 Custom Formats
 Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Settings Tab` and click `Advanced Settings` to set `Shown` state. Then click the `Custom Formats` tab.
 
-Here we use `Custom Formats` to search for movies containing 4K, 10bit HDR and Dolby Atmos or DTS-X (for those people with atmos audio systems).
+Here we use `Custom Formats` to search for movies containing our audio requirements.
+*  Lossless Object Surround: *Dolby TrueHD Atmos and DTS-X*
+*  Lossless Surround: *Dolby TrueHD, DTS-HD, and DTS-HD MA*
+*  HQ Object Surround: *Dolby Digital Plus with Atmos*
+*  HQ Surround: *Dolby Digital Plus and DTS*
+*  Surround Dolby Digital: *Dolby Digital*
+*  Generic Surround: *Files or releases without one of the above codecs but containing 5.1/7.1 in the name*
 
-**1 -  Lossless Object Surround + x265**<br/>
-C_RXRQ_(X|H).?265|HEVC<br/>
-C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X<br/>
-<br/>
-**2 -  Lossless Object Surround + x264**<br/>
-C_RXRQ_(X|H).?264<br/>
-C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X<br/>
-<br/>
-**3 - Lossless Surround + x265**<br/>
-C_RXRQ_(X|H).?265|HEVC<br/>
-C_RXRQ_DTS.?HD|DTS.?MA|TRUEHD<br/>
-C_RXRQN_ATMOS<br/>
-<br/>
-**4 - Lossless Surround + x264**<br/>
-C_RXRQ_(X|H).?264<br/>
-C_RXRQ_DTS.?HD|DTS.?MA|TRUEHD<br/>
-C_RXRQN_ATMOS<br/>
-**5 - HQ Object Surround + x265**<br/>
-C_RXRQ_(X|H).?265|HEVC<br/>
-C_RXRQ_DDP.?ATMOS|DDP.?(5.1|7.1).?ATMOS|E.?AC.?3.?ATMOS|E.?AC.?3.?(5.1|7.1).?ATMOS|AC.?3.?ATMOS<br/>
-**6 - HQ Object Surround + x264**<br/>
-C_RXRQ_(X|H).?264<br/>
-C_RXRQ_DDP.?ATMOS|DDP.?(5.1|7.1).?ATMOS|E.?AC.?3.?ATMOS|E.?AC.?3.?(5.1|7.1).?ATMOS|AC.?3.?ATMOS<br/>
-
+**1 -  Lossless Object Surround + x265 + HDR**
+```
+C_RXRQ_(X|H).?265|HEVC
+C_RXRQ_HDR|10bit
+C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X
+```
+**2 -  Lossless Object Surround + HDR**
+```
+C_RXRQ_HDR|10bit
+C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X
+```
+**3 - Lossless Surround + x265 + HDR**
+```
+C_RXRQ_(X|H).?265|HEVC
+C_RXRQ_HDR|10bit
+C_RXRQ_DTS.?HD|DTS.?MA|TRUEHD
+C_RXRQN_ATMOS
+```
+**4 - Lossless Surround + HDR**
+```
+C_RXRQ_HDR|10bit
+C_RXRQ_DTS.?HD|DTS.?MA|TRUEHD
+C_RXRQN_ATMOS
+```
+**5 - HQ Object Surround + x265 + HDR**
+```
+C_RXRQ_(X|H).?265|HEVC
+C_RXRQ_HDR|10bit
+C_RXRQ_DDP.?ATMOS|DDP.?(5.1|7.1).?ATMOS|E.?AC.?3.?ATMOS|E.?AC.?3.?(5.1|7.1).?ATMOS|AC.?3.?ATMOS
+```
+**6 - HQ Object Surround + HDR**
+```
+C_RXRQ_HDR|10bit
+C_RXRQ_DDP.?ATMOS|DDP.?(5.1|7.1).?ATMOS|E.?AC.?3.?ATMOS|E.?AC.?3.?(5.1|7.1).?ATMOS|AC.?3.?ATMOS
+```
+**7 - HQ Surround**
+```
+C_RXRQ_DTS|E.?AC.?3|DDP
+C_RXRQN_ATMOS
+C_RXRQN_DTS.?(X|MA|HD)
+```
+**8 - Dolby Digital Surround**
+```
+C_RXRQ_DD.?(5.1|7.1)|AC.?3.?(5.1|7.1)
+C_RXRQN_DDP
+C_RXRQN_EAC.?3
+C_RXRQN_ATMOS
+```
+**9 - Generic Surround**
+```
+C_RXRQ_\B((7|5).1)\B
+C_RXRQN_AC.?3
+C_RXRQN_DDP
+C_RXRQN_EAC.?3
+C_RXRQN_DTS.?
+C_RXRQN_ATMOS
+C_RXRQN_TRUEHD
+```
 
 ## 3.00 Create & Restore Radarr Backups
 Radarr has a built in backup service. Radarr will execute a backup every 7 days creating a zip file located in `/home/media/.config/Radarr/Backups/scheduled`.
