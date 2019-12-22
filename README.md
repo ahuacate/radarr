@@ -299,7 +299,7 @@ Profiles correspond to your TV, audio and media player capabilities. The followi
 
 Create a new profile by clicking the `+` icon. Complete the form as follows making sure of the order of `Custom Formats`.
 
-![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/4K_1080p.png)
+![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/4k_1080p.png)
 
 **B) Delay profiles**
 Edit Delay Profiles. Add 300 minutes to the torrent delay.
