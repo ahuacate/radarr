@@ -20,13 +20,14 @@ Tasks to be performed are:
 - [1.00 Easy Radarr Configuration](#100-easy-radarr-configuration)
 - [2.00 Manually Configure Radarr Settings](#200-manually-configure-radarr-settings)
 	- [2.01 Configure Media Management](#201-configure-media-management)
-	- [2.02 Configure Profiles](#202-configure-profiles)
-	- [2.03 Configure Indexers](#203-configure-indexers)
-	- [2.04 Configure Download Clients](#204-configure-download-clients)
-	- [2.05 Configure Lists](#205-configure-lists)
-	- [2.06 Configure Connect](#206-configure-connect)
-	- [2.07 Configure General](#207-configure-general)
-	- [2.08 Configure UI](#208-configure-ui)
+	- [2.02 Configure Indexers](#202-configure-indexers)
+	- [2.03 Configure Download Clients](#203-configure-download-clients)
+	- [2.04 Configure Lists](#204-configure-lists)
+	- [2.05 Configure Connect](#205-configure-connect)
+	- [2.06 Configure General](#206-configure-general)
+	- [2.07 Custom Formats](#207-custom-formats)
+	- [2.08 Configure Profiles](#208-configure-profiles)
+	- [2.09 Configure UI](#209-configure-ui)
 - [3.00 Create & Restore Radarr Backups](#300-create--restore-radarr-backups)
 	- [3.01 Create a Base Settings Backup](#301-create-a-base-settings-backup)
 	- [3.02 Restore to Radarr Base Settings](#302-restore-to-radarr-base-settings)
@@ -42,12 +43,14 @@ Or take the the manual route and proceed to Step 2 [HERE](https://github.com/ahu
 
 After running the scripted CLI Easy Method your input is required for the following settings:
 
-*  Adding your NZB Usenet Indexer provider accounts which can be done by performing this step [2.03 (B) Configure Indexers](https://github.com/ahuacate/radarr/blob/master/README.md#203-configure-indexers)
-*  Adding Deluge downloader and login credentials [2.04 (A) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
-*  Adding NZBGet downloader and login credentials [2.04 (B) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-download-clients)
-*  Add a IMDb Watchlist to autoadd your movies [2.05 Configure Lists](https://github.com/ahuacate/radarr/blob/master/README.md#205-configure-lists)
-*  Add your JellyFin Connection [2.06 Configure Connect](https://github.com/ahuacate/radarr/blob/master/README.md#206-configure-connect)
-*  Updating Radarr to use a secure login username & password which can be done by performing this step [2.06 Configure General](https://github.com/ahuacate/radarr/blob/master/README.md#207-configure-general); *and,*
+*  Adding your NZB Usenet Indexer provider accounts which can be done by performing this step [2.02 (B) Configure Indexers](https://github.com/ahuacate/radarr/blob/master/README.md#202-configure-indexers)
+*  Adding Deluge downloader and login credentials [2.03 (A) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#203-configure-download-clients)
+*  Adding NZBGet downloader and login credentials [2.03 (B) Configure Download Client](https://github.com/ahuacate/radarr/blob/master/README.md#203-configure-download-clients)
+*  Add a IMDb Watchlist to autoadd your movies [2.04 Configure Lists](https://github.com/ahuacate/radarr/blob/master/README.md#204-configure-lists)
+*  Add your JellyFin Connection [2.05 Configure Connect](https://github.com/ahuacate/radarr/blob/master/README.md#205-configure-connect)
+*  Updating Radarr to use a secure login username & password which can be done by performing this step [2.06 Configure General](https://github.com/ahuacate/radarr/blob/master/README.md#206-configure-general)
+*  Create Custom Formats to manage audio quality [2.07 Custom Formats](https://github.com/ahuacate/radarr/blob/master/README.md#207-custom-formats)
+*  Configure Profiles to manage search criteria [2.08 Configure Profiles](https://github.com/ahuacate/radarr/blob/master/README.md#208-configure-profiles); *and,*
 
 Begin the Easy Method with the Proxmox web interface and go to `typhoon-01` > `115 (Radarr)` > `>_ Shell` and type the following:
 ```
@@ -166,7 +169,7 @@ Then go to your watchlist on IMDb's website. Press the `Edit` button for your li
 | Enable Automatic Sync | `Yes`
 | Add Movies Monitored | `Yes`
 | Minimum Availability | `Physical/Web`
-| Quality Profile | `HD-1080p` | *Change to Ultra-HD if you have a 4K TV*
+| Quality Profile | `HD-1080p` | *Change to `4K > HD-1080p` if you have a 4K TV*
 | Folder | /mnt/videos/movies/
 | Tags | leave blank
 | Radarr API URL | `https://api.radarr.video/v2`
