@@ -216,11 +216,15 @@ And click `Save`.
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/general.png)
 
 ### 2.07 Custom Formats
-I only want 4K movies if they match a audio format. However, if it can't find a 4K release, it should just go with 1080p. This achieved by creating a new 'Profile' called `4K > HD-1080p` with `Custom Formats` audio and video compression tags. 
+`Custom Formats` are a way to completely automate checks if one or more of your `Custom Formats` might match against the Release or File name. A custom format has so called "Format Tags". These tags describe how Radarr tries to match a release or file (i.e HEVC, x264, x265, atmos, dolby, dts and much more). 
 
-First create a set of audio and video compression tags by clicking on the `Custom Formats` tab.
+My Radarr configuration only want 4K movies if they match a referred sequence of ranked audio formats. Upgrading stops when at least one `Custom Format` match is above the profile cutoff.
 
-Here we use `Custom Formats` to search for movies containing our audio requirements
+However, if Radarr can't find a 4K release, then it should search for a 1080p release. To achieve this we create a new `Profiles` called `4K > HD-1080p` with a range of media qualities ranked from our preferred `Remux-2160p` to `HDTV-1080p` - a range of 8 media quality settings. Then we apply our `Custom Formats` to the `4K > HD-1080p` profile for further matching (i.e HEVC, x264, x265, atmos, dolby, dts and much more).
+
+Before creating the `4K > HD-1080p` profile first create your `Custom Formats` by clicking on the `Custom Formats` tab.
+
+The following examples of `Custom Formats` search for movies containing audio, compression and dynamic range (SDR or HDR) requirements:
 *  Lossless Object Surround: *Dolby TrueHD Atmos and DTS-X*
 *  Lossless Surround: *Dolby TrueHD, DTS-HD, and DTS-HD MA*
 *  HQ Object Surround: *Dolby Digital Plus with Atmos*
@@ -228,9 +232,10 @@ Here we use `Custom Formats` to search for movies containing our audio requireme
 *  Surround Dolby Digital: *Dolby Digital*
 *  Generic Surround: *Files or releases without one of the above codecs but containing 5.1/7.1 in the name*
 
-I also add the requirement for HEVC + HDR 10bit to my ultimate audio quality search criteria (ignoring all SDR).
+I also add matching criteria for HEVC and/or HDR 10bit to my audio quality search criteria (ignoring all SDR).
 
-The following is my configuration. Its applicable for a 4K HDR 10bit TV, Atmos audio soundbar and Kodi player (i.e LG OLED C9, Samsung Atmos Q90R soundbar and Odroid N2 Coreelec player). Modify to meet your installed equipment.
+**A)  Custom Formats - 4K, 10bit HDR & Atmos compatible systems**
+The following is my configuration. Its applicable for a 4K HDR 10bit TV, Atmos capable audio reciever or soundbar and a Kodi player (i.e LG OLED C9, Samsung Atmos Q90R soundbar and a Odroid N2 Coreelec built player). Modify to meet your installed equipment. Note the ranking numeric 1 to 9 - it makes it easier to maintain correct ranking when enabling in your quality `Profile` (i.e `4K > HD-1080p`).
 
 **1 -  Lossless Object Surround + x265 + HDR**
 ```
@@ -296,20 +301,98 @@ C_RXRQN_TRUEHD
 ```
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/custom_formats.png)
 
+**B)  Custom Formats - Standard audio ONLY (NO 10bit/HDR/SDR/Atmos)**
+I have'nt tested this but it should be okay. Its applicable for 1080p systems - NO 4K, 10bit HDR. Modify to meet your installed equipment. Note the ranking numeric 1 to 9 - it makes it easier to maintain correct ranking when enabling in your quality `Profile` (i.e `HD-1080p`).
+
+**1 -  Lossless Object Surround + x265**
+```
+C_RXRQ_(X|H).?265|HEVC
+C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X
+C_RXRQN_SDR|HDR|10bit
+```
+**2 -  Lossless Object Surround**
+```
+C_RXRQ_TRUEHD.?(5.1|7.1).?ATMOS|ATMOS.?TRUEHD.?(5.1|7.1)|TRUEHD.?ATMOS.?(5.1|7.1)|DTSX|DTS-X
+C_RXRQN_SDR|HDR|10bit
+```
+**3 - Lossless Surround + x265**
+```
+C_RXRQ_(X|H).?265|HEVC
+C_RXRQ_DTS.?HD|DTS.?MA|TRUEHD
+C_RXRQN_(ATMOS|SDR|HDR|10bit)
+```
+**4 - Lossless Surround**
+```
+C_RXRQ_DTS.?HD|DTS.?MA|TRUEHD
+C_RXRQN_(ATMOS|SDR|HDR|10bit)
+```
+**5 - HQ Object Surround + x265**
+```
+C_RXRQ_(X|H).?265|HEVC
+C_RXRQ_DDP.?ATMOS|DDP.?(5.1|7.1).?ATMOS|E.?AC.?3.?ATMOS|E.?AC.?3.?(5.1|7.1).?ATMOS|AC.?3.?ATMOS
+C_RXRQN_(SDR|HDR|10bit)
+```
+**6 - HQ Object Surround**
+```
+C_RXRQ_DDP.?ATMOS|DDP.?(5.1|7.1).?ATMOS|E.?AC.?3.?ATMOS|E.?AC.?3.?(5.1|7.1).?ATMOS|AC.?3.?ATMOS
+C_RXRQN_(SDR|HDR|10bit)
+```
+**7 - HQ Surround**
+```
+C_RXRQ_DTS|E.?AC.?3|DDP
+C_RXRQN_ATMOS
+C_RXRQN_DTS.?(X|MA|HD)
+C_RXRQN_(SDR|HDR|10bit)
+```
+**8 - Dolby Digital Surround**
+```
+C_RXRQ_DD.?(5.1|7.1)|AC.?3.?(5.1|7.1)
+C_RXRQN_DDP
+C_RXRQN_EAC.?3
+C_RXRQN_ATMOS
+C_RXRQN_(SDR|HDR|10bit)
+```
+**9 - Generic Surround**
+```
+C_RXRQ_\B((7|5).1)\B
+C_RXRQN_AC.?3
+C_RXRQN_DDP
+C_RXRQN_EAC.?3
+C_RXRQN_DTS.?
+C_RXRQN_ATMOS
+C_RXRQN_TRUEHD
+C_RXRQN_(SDR|HDR|10bit)
+```
+
 ### 2.08 Configure Profiles
-Profiles correspond to your TV, audio and media player capabilities. The following is a custom profile for `4K > HD-1080p`.
+Each box in the Profiles tab shows a list of allowed qualities. For a movie that is assigned the "Any" profile, radarr will search for all qualities in the list, and choose highest match found.
 
-**A)  Create a new Profile**
+You may create new `Profiles` with specific qualities in any order you wish to use with higher priority qualities at the top, and lower priority qualities at the bottom.
 
-Create a new profile by clicking the `+` icon. Complete the form as follows making sure of the order of `Custom Formats`.
+The following is a custom profile for `4K > HD-1080p`.
+
+**A)  Create a new Profile - `4K > HD-1080p`**
+
+This `Profile` is applicable for a 4K HDR 10bit TV, Atmos capable audio reciever or soundbar and a Kodi player (i.e LG OLED C9, Samsung Atmos Q90R soundbar and a Odroid N2 Coreelec built player). 
+
+Create the new profile by clicking the `+` icon. Complete the form as follows making sure of the order of `Custom Formats`.
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/4k_1080p.png)
 
 **B) Delay profiles**
-Edit Delay Profiles. Add 300 minutes to the torrent delay.
+You can set up Delay Profiles to wait to download preferred releases until after a certain time has elapsed, this will allow extra time for releases with your preferred tags or cutoffs to be released.
+
+For example, my delay profile will wait one day to start the download, and if any releases containing my preferred tags come across it will be preferred over others that do not have the preferred tags.
+
+I recommend to set as follows:
+
+| Delay Profile | Value | Notes
+| :---  | :---: | :---
+| Protocol | `Prefer Usenet`
+| Usenet Delay | `1440`
+| Torrent Delay | `1440`
 
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/profiles.png)
-
 
 ### 2.09 Configure UI
 
