@@ -71,10 +71,15 @@ Thats it. Now go and complete Steps 2.03 (B), 2.04 (A), 2.04 (B), 2.05, 2.06, 2.
 Browse to http://192.168.50.116:7878 and login to Radarr. Click the `Settings Tab` and click `Advanced Settings` to set `Shown` state. Configure all your tabs as follows.
 
 ### 2.01 Configure Media Management
-Set as shown. For the field `Standard Movie Format` insert:
+Set as shown.
+
+For the field **Standard Movie Format** edit:
 ```
 {Movie Title} ({Release Year}) [{Quality Title} {Edition Tags} {MediaInfo Audio}-{MediaInfo AudioChannels} {MEDIAINFO VIDEOCODEC} {MediaInfo HDR}]
 ```
+
+And cross check and set the remaining fields as follows:
+
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/media_management.png)
 
 ### 2.02 Configure Indexers
