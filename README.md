@@ -392,6 +392,7 @@ Create the new profile by clicking the `+` icon. Complete the form as follows ma
 ![alt text](https://raw.githubusercontent.com/ahuacate/radarr/master/images/4k_1080p.png)
 
 **B) Delay profiles**
+
 You can set up Delay Profiles to wait to download preferred releases until after a certain time has elapsed, this will allow extra time for releases with your preferred tags or cutoffs to be released.
 
 For example, my delay profile will wait one day to start the download, and if any releases containing my preferred tags come across it will be preferred over others that do not have the preferred tags.
