@@ -64,7 +64,7 @@ chown 1605:65605 /home/media/.config/Radarr/config.xml &&
 sudo systemctl restart radarr.service
 ```
 
-Thats it. Now go and complete Steps 2.03 (B), 2.04 (A), 2.04 (B), 2.05, 2.06  and 2.07.
+Thats it. Now go and complete Steps 2.03 (B), 2.04 (A), 2.04 (B), 2.05, 2.06, 2.07  and 2.08.
 
 
 ## 2.00 Manually Configure Radarr Settings
